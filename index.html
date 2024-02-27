@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Trishir Vind - Web Designer</title>
+</head>
+<style>
+    #content, footer {
+    transition: transform 0.2s ease-in-out;
+    transform: translateX(100%);
+}
+
+.content-visible #content, .content-visible footer {
+    transform: translateX(0);
+}
+</style>
+<body>
+    <header>
+        <div class="container_title">
+            <h1>Trishir Vind</h1>
+        </div>
+
+        <div class="social-icons" style="margin-right: 30px;">
+        <a href="mailto:trishirkumarvind@gmail.com" target="_blank"><img src="gmail.png"></a>
+        <a href="https://github.com/GaNjA-spec" target="_blank"><img src="github.png"></a>
+        <a href="https://www.instagram.com/gareebtrishir?igsh=Zml3ODg5cmFvOTJk" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Instagram_icon.png/256px-Instagram_icon.png"></a>
+        <a href="https://wa.me/6267082695" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/WhatsApp_icon.png"></a>
+        <!-- Add more social media icons as needed -->
+    </div>
+         
+    </header>
+
+    <section id="banner">
+        <img src="banner.jpeg" alt="Banner Image">
+    </section>
+
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href="#about" onclick="changeTabContent('about')">About Me</a></li>
+                <li><a href="#portfolio" onclick="changeTabContent('portfolio')">Portfolio</a></li>
+                
+            </ul>
+        </div>
+    </nav>
+
+    <section id="content">
+    </section>
+
+
+    <script src="script.js"></script>
+    <script>
+        // Set the default content to the "About Me" tab
+        document.addEventListener('DOMContentLoaded', function () {
+            changeTabContent('portfolio');
+        });
+
+        function changeTabContent(tab) {
+            const contentContainer = document.getElementById('content');
+            let newContent = '';
+
+            // Remove the 'active' class from all links
+            document.querySelectorAll('nav ul li a').forEach(link => {
+                link.classList.remove('active');
+            });
+
+            switch (tab) {
+                case 'portfolio':
+                    newContent = `
+                        <h2 style="text-align: center;">My Portfolio</h2>
+                        <div style="text-align:center;" class="project">
+                            <h3>Project 1: School Project</h3>
+                            <p>A website about spreading awareness on the dangers and side-effects of 'Fast Fashion'.</p>
+                            <a href="https://ganja-spec.github.io/Site.github.io/index.html" target="_blank" class="visit-button">Visit Site</a>
+                        </div>
+                        <div style="text-align:center;" class="project">
+                            <h3>More to come soon...</h3>
+                        </div>
+                    `;
+                    break;
+                case 'contact':
+                    newContent = '<h2 style="text-align:center;">Contact Me</h2><p style="text-align:center;">This is the Contact content.</p>';
+                    break;
+                case 'about':
+                    newContent = '<div class="container_2"><h2 style="text-align:center;">About Me</h2><p>Hello! I\'m Trishir Vind, a passionate web designer with a keen eye for aesthetics and functionality, based in India.</p><p> I specialize in creating visually appealing and user-friendly websites that leave a lasting impression.</p><p>My journey in the world of web design began at the age of 15, and since then, I\'ve been dedicated\nto staying on top of industry trends and adopting the latest technologies to deliver cutting-edge solutions.</p><p>I believe in the power of design to communicate ideas and enhance user experiences. Whether it\'s\ndeveloping a brand identity or crafting an intuitive website interface, I strive for perfection in every\nproject I undertake.</p><p>Let\'s connect and discuss how we can bring your ideas to life through innovative and impactful web design.</p></div>'
+                    break;
+                default:
+                newContent = '<h2 style="text-align:center;">My Portfolio</h2><p style="text-align:center;">This is the Portfolio content.</p>';
+            }
+
+             // Apply a smooth slide-in transition
+            contentContainer.style.transform = 'translateX(-100%)';
+            setTimeout(() => {
+                contentContainer.innerHTML = newContent;
+                contentContainer.style.transform = 'translateX(0)';
+            }, 200); // 500ms should match the transition duration in CSS
+
+            // Add the 'active' class to the clicked link
+            document.querySelector(`nav ul li a[href="#${tab}"]`).classList.add('active');
+        }
+    </script>
+</body>
+</html>
