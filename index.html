@@ -7,12 +7,21 @@
     <title>Trishir Vind - Web Designer</title>
 </head>
 <style>
-    #content, footer {
+    #content {
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+    footer {
     transition: transform 0.2s ease-in-out;
     transform: translateY(100%);
 }
 
-.content-visible #content, .content-visible footer {
+.content-visible #content{
+            opacity: 1;
+        }
+    
+    .content-visible footer {
     transform: translateY(0);
 }
 
@@ -23,6 +32,24 @@
     -webkit-tap-highlight-color: transparent;
     user-select: none;
     }
+
+    @keyframes slideFromLeft {
+            from {
+                transform: translateX(-100%);
+            }
+            to {
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes slideFromRight {
+            from {
+                transform: translateX(100%);
+            }
+            to {
+                transform: translateX(0);
+            }
+        }
 </style>
 <body>
     <header>
@@ -64,16 +91,14 @@
 
     <script src="script.js"></script>
     <script>
-        // Set the default content to the "About Me" tab
         document.addEventListener('DOMContentLoaded', function () {
-            changeTabContent('portfolio');
+            changeTabContent('portfolio'); // Change default to 'about'
         });
 
         function changeTabContent(tab) {
             const contentContainer = document.getElementById('content');
             let newContent = '';
 
-            // Remove the 'active' class from all links
             document.querySelectorAll('nav ul li a').forEach(link => {
                 link.classList.remove('active');
             });
@@ -107,14 +132,14 @@
                 newContent = '<h2 style="text-align:center;">My Portfolio</h2><p style="text-align:center;">This is the Portfolio content.</p>';
             }
 
-             // Apply a smooth slide-in transition
-            contentContainer.style.transform = 'translateX(-100%)';
+            contentContainer.style.opacity = '0';
+
             setTimeout(() => {
                 contentContainer.innerHTML = newContent;
-                contentContainer.style.transform = 'translateX(0)';
-            }, 200); // 500ms should match the transition duration in CSS
+                contentContainer.style.animation = '';
+                contentContainer.style.opacity = '1';
+            }, 500);
 
-            // Add the 'active' class to the clicked link
             document.querySelector(`nav ul li a[href="#${tab}"]`).classList.add('active');
         }
     </script>
