@@ -7,21 +7,12 @@
     <title>Trishir Vind - Web Designer</title>
 </head>
 <style>
-    #content {
-            opacity: 0;
-            transition: opacity 0.5s ease-in-out;
-        }
-
-    footer {
+    #content, footer {
     transition: transform 0.2s ease-in-out;
     transform: translateY(100%);
 }
 
-.content-visible #content{
-            opacity: 1;
-        }
-    
-    .content-visible footer {
+.content-visible #content, .content-visible footer {
     transform: translateY(0);
 }
 
@@ -32,24 +23,6 @@
     -webkit-tap-highlight-color: transparent;
     user-select: none;
     }
-
-    @keyframes slideFromLeft {
-            from {
-                transform: translateX(-100%);
-            }
-            to {
-                transform: translateX(0);
-            }
-        }
-        
-        @keyframes slideFromRight {
-            from {
-                transform: translateX(100%);
-            }
-            to {
-                transform: translateX(0);
-            }
-        }
 </style>
 <body>
     <header>
@@ -91,14 +64,16 @@
 
     <script src="script.js"></script>
     <script>
+        // Set the default content to the "About Me" tab
         document.addEventListener('DOMContentLoaded', function () {
-            changeTabContent('about'); // Change default to 'about'
+            changeTabContent('portfolio');
         });
 
         function changeTabContent(tab) {
             const contentContainer = document.getElementById('content');
             let newContent = '';
 
+            // Remove the 'active' class from all links
             document.querySelectorAll('nav ul li a').forEach(link => {
                 link.classList.remove('active');
             });
@@ -121,28 +96,25 @@
                             <h3>More to come soon...</h3>
                         </div>
                     `;
-                   contentContainer.style.animation = 'slideFromRight 0.5s ease-in-out';
                     break;
                 case 'contact':
                     newContent = '<h2 style="text-align:center;">Contact Me</h2><p style="text-align:center;">This is the Contact content.</p>';
-                    contentContainer.style.animation = 'slideFromLeft 0.5s ease-in-out';
                     break;
                 case 'about':
-                    newContent = '<h2 style="text-align:center;">About Me</h2><div class="container_2"><p>Hello! I\'m Trishir Vind, a passionate web designer with a keen eye for aesthetics and functionality, based in India.</p><p> I specialize in creating visually appealing and user-friendly websites that leave a lasting impression.</p><p>My journey in the world of web design began at the age of 15, and since then, I\'ve been dedicated\nto staying on top of industry trends and adopting the latest technologies to deliver cutting-edge solutions.</p><p>I believe in the power of design to communicate ideas and enhance user experiences. Whether it\'s\ndeveloping a brand identity or crafting an intuitive website interface, I strive for perfection in every\nproject I undertake.</p><p>Let\'s connect and discuss how we can bring your ideas to life through innovative and impactful web design.</p></div>';
-                    contentContainer.style.animation = 'slideFromLeft 0.5s ease-in-out';
+                    newContent = '<div class="container_2"><h2 style="text-align:center;">About Me</h2><p>Hello! I\'m Trishir Vind, a passionate web designer with a keen eye for aesthetics and functionality, based in India.</p><p> I specialize in creating visually appealing and user-friendly websites that leave a lasting impression.</p><p>My journey in the world of web design began at the age of 15, and since then, I\'ve been dedicated\nto staying on top of industry trends and adopting the latest technologies to deliver cutting-edge solutions.</p><p>I believe in the power of design to communicate ideas and enhance user experiences. Whether it\'s\ndeveloping a brand identity or crafting an intuitive website interface, I strive for perfection in every\nproject I undertake.</p><p>Let\'s connect and discuss how we can bring your ideas to life through innovative and impactful web design.</p></div>'
                     break;
                 default:
-                    newContent = '<h2 style="text-align:center;">My Portfolio</h2><p style="text-align:center;">This is the Portfolio content.</p>';
+                newContent = '<h2 style="text-align:center;">My Portfolio</h2><p style="text-align:center;">This is the Portfolio content.</p>';
             }
 
-            contentContainer.style.opacity = '0';
-
+             // Apply a smooth slide-in transition
+            contentContainer.style.transform = 'translateX(-100%)';
             setTimeout(() => {
                 contentContainer.innerHTML = newContent;
-                contentContainer.style.animation = '';
-                contentContainer.style.opacity = '1';
-            }, 500);
+                contentContainer.style.transform = 'translateX(0)';
+            }, 200); // 500ms should match the transition duration in CSS
 
+            // Add the 'active' class to the clicked link
             document.querySelector(`nav ul li a[href="#${tab}"]`).classList.add('active');
         }
     </script>
