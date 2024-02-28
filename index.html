@@ -92,7 +92,7 @@
     <script src="script.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            changeTabContent('portfolio'); // Change default to 'about'
+            changeTabContent('about'); // Change default to 'about'
         });
 
         function changeTabContent(tab) {
@@ -121,15 +121,18 @@
                             <h3>More to come soon...</h3>
                         </div>
                     `;
+                   contentContainer.style.animation = 'slideFromRight 0.5s ease-in-out';
                     break;
                 case 'contact':
                     newContent = '<h2 style="text-align:center;">Contact Me</h2><p style="text-align:center;">This is the Contact content.</p>';
+                    contentContainer.style.animation = 'slideFromLeft 0.5s ease-in-out';
                     break;
                 case 'about':
-                    newContent = '<div class="container_2"><h2 style="text-align:center;">About Me</h2><p>Hello! I\'m Trishir Vind, a passionate web designer with a keen eye for aesthetics and functionality, based in India.</p><p> I specialize in creating visually appealing and user-friendly websites that leave a lasting impression.</p><p>My journey in the world of web design began at the age of 15, and since then, I\'ve been dedicated\nto staying on top of industry trends and adopting the latest technologies to deliver cutting-edge solutions.</p><p>I believe in the power of design to communicate ideas and enhance user experiences. Whether it\'s\ndeveloping a brand identity or crafting an intuitive website interface, I strive for perfection in every\nproject I undertake.</p><p>Let\'s connect and discuss how we can bring your ideas to life through innovative and impactful web design.</p></div>'
+                    newContent = '<h2 style="text-align:center;">About Me</h2><div class="container_2"><p>Hello! I\'m Trishir Vind, a passionate web designer with a keen eye for aesthetics and functionality, based in India.</p><p> I specialize in creating visually appealing and user-friendly websites that leave a lasting impression.</p><p>My journey in the world of web design began at the age of 15, and since then, I\'ve been dedicated\nto staying on top of industry trends and adopting the latest technologies to deliver cutting-edge solutions.</p><p>I believe in the power of design to communicate ideas and enhance user experiences. Whether it\'s\ndeveloping a brand identity or crafting an intuitive website interface, I strive for perfection in every\nproject I undertake.</p><p>Let\'s connect and discuss how we can bring your ideas to life through innovative and impactful web design.</p></div>';
+                    contentContainer.style.animation = 'slideFromLeft 0.5s ease-in-out';
                     break;
                 default:
-                newContent = '<h2 style="text-align:center;">My Portfolio</h2><p style="text-align:center;">This is the Portfolio content.</p>';
+                    newContent = '<h2 style="text-align:center;">My Portfolio</h2><p style="text-align:center;">This is the Portfolio content.</p>';
             }
 
             contentContainer.style.opacity = '0';
