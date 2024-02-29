@@ -28,7 +28,7 @@
     }
   
     .preloader img {
-      width: 40%; /* Adjust the width percentage as needed */
+      width: 20%; /* Adjust the width percentage as needed */
       height: auto; /* Maintain the aspect ratio */
       animation: fadeOut 3s ease-out forwards; /* Use the same fade-out animation */
     }
@@ -45,6 +45,16 @@
     /* Add this class to hide the preloader when content is loaded */
     .content-loaded .preloader {
       display: none;
+
+      
+    }
+    .hidden-gif {
+        display: none;
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        max-width: 150px; /* Adjust the size as needed */
+        max-height: 150px;
     }
   </style>
 <style>
@@ -64,6 +74,34 @@
     -webkit-tap-highlight-color: transparent;
     user-select: none;
     }
+
+    
+</style>
+
+<style>
+    #easterEggModal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        justify-content: center;
+        align-items: center;
+    }
+
+    #easterEggContent {
+        background-color: none;
+        padding: 20px;
+        border-radius: 10px;
+        text-align: center;
+    }
+
+    #easterEggGif {
+        max-width: 100%;
+        max-height: 80vh;
+    }
 </style>
 <body>
     <div class="preloader">
@@ -71,7 +109,7 @@
       </div>
     <header>
         <div class="container_title">
-            <h1>Trishir Vind</h1>
+            <h1 id="easterEggElement" >Trishir Vind</h1>
         </div>
 
         <div class="social-icons" style="margin-right: 10px;">
@@ -104,7 +142,11 @@
     <footer id="footer">
             &copy Trishir Vind-2024
         </footer>
-
+        <div id="easterEggModal">
+            <div id="easterEggContent">
+                <img id="easterEggGif" src="homer.gif" alt="Easter Egg Gif">
+            </div>
+        </div>
 
     <script src="script.js"></script>
     <script>
@@ -224,5 +266,38 @@
   }, 2000); // Adjust the delay as needed
 });
   </script>
+
+<script>
+    let clicks = 0;
+
+function handleEasterEggClick() {
+    clicks++;
+
+    if (clicks === 5) {
+        // Display the modal
+        document.getElementById('easterEggModal').style.display = 'flex';
+
+        // Set a timeout to close the modal after a specific duration (e.g., 3 seconds)
+        setTimeout(() => {
+            document.getElementById('easterEggModal').style.display = 'none';
+        }, 3000);
+
+        // Reset clicks for potential future use
+        clicks = 0;
+    }
+}
+
+ // Attach the click event listener to an element of your choice
+ document.getElementById('easterEggElement').addEventListener('click', handleEasterEggClick);
+ 
+
+// Close the modal when clicking outside the content
+document.getElementById('easterEggModal').addEventListener('click', function(event) {
+    if (event.target === this) {
+        this.style.display = 'none';
+    }
+});
+  
+</script>
 </body>
 </html>
