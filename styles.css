@@ -1,10 +1,30 @@
+@font-face {
+    font-family: 'CSfont';
+    src: url('Ailerons-Typeface.otf') format('opentype');
+    /* You can also include other font formats (e.g., woff, woff2) for better browser compatibility */
+}
+
+@font-face {
+    font-family: 'CSfont2';
+    src: url('Urbanist-VariableFont_wght.ttf') format('opentype');
+    /* You can also include other font formats (e.g., woff, woff2) for better browser compatibility */
+}
+
+@font-face {
+    font-family: 'CSfont3';
+    src: url('kincrev-l3rpg.otf') format('opentype');
+    /* You can also include other font formats (e.g., woff, woff2) for better browser compatibility */
+}
+
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'CSfont2', ExtraLight;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     background-color: #0f0f0e;
 }
+
+
 
 .container, .container_heading, .container_2, .container_1 {
     max-width: 1200px;
@@ -29,6 +49,7 @@ header {
 
 header h1 {
     margin: 0;
+    font-family: 'CSfont', Typeface;
     font-size: 2rem;
 }
 
@@ -77,6 +98,7 @@ section {
 
 h2 {
     color: #333;
+    font-family: 'CSfont3';
     font-size: 2rem;
 }
 
@@ -96,6 +118,7 @@ h2 {
 
 .portfolio-item h3 {
     margin: 20px 0 10px;
+    font-family: 'CSfont2', ExtraLight;
     font-size: 1.5rem;
 }
 
@@ -107,6 +130,7 @@ h2 {
 footer {
     background: #0e0e0e;
     color: #fff;
+    font-family: 'CSfont2', ExtraLight;
     text-align: center;
     padding: 20px 0;
 }
@@ -116,6 +140,7 @@ header h3 {
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
+    font-family: 'CSfont2', ExtraLight;
     -webkit-text-fill-color: transparent;
     color: transparent;
     margin: 0;
@@ -190,3 +215,5 @@ header {
         font-size: 1.2rem; /* Adjusted font size for mobile */
     }
 }
+
+
