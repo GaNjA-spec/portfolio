@@ -196,10 +196,11 @@ header {
     }
 
     .social-icons img {
-        width: 27px;
-        height: 27px;
+        width: 25px;
+        height: 25px;
         border-radius: 50%;
     }
+
 
     header h1 {
         font-size: 1.5rem; /* Adjusted font size for mobile */
