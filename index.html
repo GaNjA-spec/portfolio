@@ -356,7 +356,7 @@ function checkSwipeCode(event) {
         if (swipeCodeIndex === swipeCode.length) {
           // Swipe code successfully entered
           swipeCodeIndex = 0; // Reset the code index for subsequent attempts
-          promptUserInput();
+          openAnotherSite();
         }
       } else {
         // Reset the code index if a wrong swipe is detected
@@ -380,29 +380,7 @@ function getSwipeDirection(deltaX, deltaY) {
   }
 }
 
-function promptUserInput() {
-  const userInputPrompt = prompt('Enter "b" and "a" (case-sensitive):');
-  if (userInputPrompt === 'b') {
-    userInput.push('b');
-    promptForA();
-  } else {
-    // Reset if user enters something other than 'b'
-    swipeCodeIndex = 0;
-    userInput.length = 0;
-  }
-}
 
-function promptForA() {
-  const userInputPrompt = prompt('Enter "a" (case-sensitive):');
-  if (userInputPrompt === 'a') {
-    userInput.push('a');
-    openAnotherSite();
-  } else {
-    // Reset if user enters something other than 'a'
-    swipeCodeIndex = 0;
-    userInput.length = 0;
-  }
-}
 
 function openAnotherSite() {
   // Replace 'https://example.com' with the URL of the site you want to open
