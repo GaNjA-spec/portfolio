@@ -311,5 +311,108 @@
             }
         }); 
 </script>
+    <script>
+        const swipeCode = [
+  'up',
+  'up',
+  'down',
+  'down',
+  'left',
+  'right',
+  'left',
+  'right',
+];
+
+const userInput = [];
+
+let swipeCodeIndex = 0;
+
+// Store touch start coordinates
+let touchStartX = 0;
+let touchStartY = 0;
+
+function checkSwipeCode(event) {
+  const touch = event.changedTouches[0];
+  const touchX = touch.clientX;
+  const touchY = touch.clientY;
+
+  if (event.type === 'touchstart') {
+    // Store the initial touch coordinates
+    touchStartX = touchX;
+    touchStartY = touchY;
+  } else if (event.type === 'touchend') {
+    // Calculate swipe direction
+    const deltaX = touchX - touchStartX;
+    const deltaY = touchY - touchStartY;
+
+    // Check if it's a swipe (consider a threshold to distinguish from taps)
+    if (Math.abs(deltaX) > 30 || Math.abs(deltaY) > 30) {
+      const swipeDirection = getSwipeDirection(deltaX, deltaY);
+
+      // Check if the swipe matches the code
+      if (swipeDirection === swipeCode[swipeCodeIndex]) {
+        swipeCodeIndex++;
+
+        if (swipeCodeIndex === swipeCode.length) {
+          // Swipe code successfully entered
+          swipeCodeIndex = 0; // Reset the code index for subsequent attempts
+          promptUserInput();
+        }
+      } else {
+        // Reset the code index if a wrong swipe is detected
+        swipeCodeIndex = 0;
+      }
+    }
+  }
+}
+
+function getSwipeDirection(deltaX, deltaY) {
+  const angle = (Math.atan2(deltaY, deltaX) * 180) / Math.PI;
+
+  if (angle >= -45 && angle < 45) {
+    return 'right';
+  } else if (angle >= 45 && angle < 135) {
+    return 'down';
+  } else if (angle >= -135 && angle < -45) {
+    return 'up';
+  } else {
+    return 'left';
+  }
+}
+
+function promptUserInput() {
+  const userInputPrompt = prompt('Enter "b" and "a" (case-sensitive):');
+  if (userInputPrompt === 'b') {
+    userInput.push('b');
+    promptForA();
+  } else {
+    // Reset if user enters something other than 'b'
+    swipeCodeIndex = 0;
+    userInput.length = 0;
+  }
+}
+
+function promptForA() {
+  const userInputPrompt = prompt('Enter "a" (case-sensitive):');
+  if (userInputPrompt === 'a') {
+    userInput.push('a');
+    openAnotherSite();
+  } else {
+    // Reset if user enters something other than 'a'
+    swipeCodeIndex = 0;
+    userInput.length = 0;
+  }
+}
+
+function openAnotherSite() {
+  // Replace 'https://example.com' with the URL of the site you want to open
+  window.location.href = 'https://ganja-spec.github.io/snake/';
+}
+
+// Attach the touch event listeners to the document
+document.addEventListener('touchstart', checkSwipeCode);
+document.addEventListener('touchend', checkSwipeCode);
+
+    </script>
 </body>
 </html>
