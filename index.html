@@ -11,6 +11,52 @@
     <link rel="stylesheet" href="styles.css">
     <title>Trishir Vind - Web Designer</title>
 </head>
+    <style>
+
+.container {
+      position: relative;
+      padding: 10px;
+    }
+
+    .copiedMessage, .godlike {
+      display: none;
+      position: absolute;
+      top: 100%; /* Position it below the header */
+      left: 0;
+      right: 0;
+      margin: 0 auto; /* Center it horizontally */
+      background-color: #4CAF50;
+      color: white;
+      border-radius: 5px;
+      padding: 10px;
+      margin-top: 10px;
+      z-index: 2; /* Set a higher z-index */
+    }
+
+    .godlike {
+      animation: shake 0.5s infinite;
+      background-color: #FF0000;
+    }
+    @keyframes shake {
+      0%, 100% {
+        transform: translateX(0);
+      }
+      10%, 30%, 50%, 70%, 90% {
+        transform: translateX(-5px);
+      }
+      20%, 40%, 60%, 80% {
+        transform: translateX(5px);
+      }
+    }
+
+    #copyHeader {
+      cursor: pointer;
+      user-select: none;
+      border-bottom: 1px dashed #000;
+      z-index: 1; /* Set a lower z-index */
+    }
+
+  </style>
 <style>
     /* Preloader styles */
     .preloader {
@@ -112,7 +158,10 @@
       </div>
     <header>
         <div class="container_title">
-            <h1 class="disable-dbl-tap-zoom" id="easterEggElement" >Trishir Vind</h1>
+            <div class="container">
+            <h1 id="copyHeader" onclick="copyText()">Trishir Vind</h1>
+            <div class="copiedMessage" id="copiedMessage">Copied!</div>
+        </div>
         </div>
 
         <div class="social-icons" style="margin-right: 10px;">
@@ -142,7 +191,7 @@
     <section id="content">
     </section>
 
-    <footer id="footer">
+    <footer class="disable-dbl-tap-zoom" id="easterEggElement" >
             &copy Trishir Vind-2024
         </footer>
         <div id="easterEggModal">
@@ -152,6 +201,89 @@
         </div>
 
     <script src="script.js"></script>
+
+    <script>
+    let lastCopyTime = 0;
+    let consecutiveCopies = 0;
+    let currentMessage = "";
+    let timeoutId;
+  
+    function copyText() {
+      const currentTime = new Date().getTime();
+      const elapsedTime = currentTime - lastCopyTime;
+  
+      const textToCopy = "Text you want to copy"; // Replace with your desired text
+      const tempTextArea = document.createElement("textarea");
+  
+      // Set the text content of the temporary textarea
+      tempTextArea.value = textToCopy;
+  
+      // Append the textarea to the document
+      document.body.appendChild(tempTextArea);
+  
+      // Select and copy the text
+      tempTextArea.select();
+      document.execCommand("copy");
+  
+      // Remove the temporary textarea from the document
+      document.body.removeChild(tempTextArea);
+  
+      // Show the appropriate message based on consecutive copies
+      const copiedMessage = document.getElementById("copiedMessage");
+      copiedMessage.classList.remove("godlike");
+  
+      if (elapsedTime < 2000) {
+        consecutiveCopies++;
+        if (consecutiveCopies === 2) {
+          currentMessage = "Double copy!";
+        } else if (consecutiveCopies === 3) {
+          currentMessage = "Triple copy!";
+        } else if (consecutiveCopies === 4) {
+          currentMessage = "Dominating!!";
+        } else if (consecutiveCopies === 5) {
+          currentMessage = "Rampage!!";
+        } else if (consecutiveCopies === 6) {
+          currentMessage = "Mega Copy!!";
+        } else if (consecutiveCopies === 7) {
+          currentMessage = "Unstoppable!!";
+        } else if (consecutiveCopies === 8) {
+          currentMessage = "Wicked Sick!!";
+        } else if (consecutiveCopies === 9) {
+          currentMessage = "Monster Copy!!!";
+        } else if (consecutiveCopies === 10) {
+          // Display GODLIKE!! with the shaking effect and red color
+          currentMessage = "GODLIKE!!!";
+          copiedMessage.classList.add("godlike");
+        } else if (consecutiveCopies === 11) {
+          // Display BEYOND GODLIKE!! with the shaking effect and red color
+          currentMessage = "BEYOND GODLIKE!!!!";
+          copiedMessage.classList.add("godlike");
+        } else {
+          // Reset if more than 11 consecutive copies
+          consecutiveCopies = 11;
+          currentMessage = "BEYOND GODLIKE!!!!";
+          copiedMessage.classList.add("godlike");
+        }
+      } else {
+        consecutiveCopies = 1;
+        currentMessage = "Copied!";
+      }
+  
+      copiedMessage.textContent = currentMessage;
+      copiedMessage.style.display = "block";
+  
+      // Clear the previous timeout
+      clearTimeout(timeoutId);
+  
+      // Set a new timeout to hide the message after 2 seconds
+      timeoutId = setTimeout(() => {
+        copiedMessage.style.display = "none";
+      }, 2000);
+  
+      // Update the last copy time
+      lastCopyTime = currentTime;
+    }
+  </script>
     <script>
         // Set the default content to the "About Me" tab
         document.addEventListener('DOMContentLoaded', function () {
