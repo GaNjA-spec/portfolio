@@ -273,35 +273,43 @@
 
 <script>
     let clicks = 0;
+        let lastClickTime = 0;
 
-function handleEasterEggClick() {
-    clicks++;
+        function handleEasterEggClick() {
+            const currentTime = new Date().getTime();
+            const timeDiff = currentTime - lastClickTime;
 
-    if (clicks === 5) {
-        // Display the modal
-        document.getElementById('easterEggModal').style.display = 'flex';
+            if (timeDiff > 1000) {
+                // Reset clicks if the interval is more than 1 second
+                clicks = 0;
+            }
 
-        // Set a timeout to close the modal after a specific duration (e.g., 3 seconds)
-        setTimeout(() => {
-            document.getElementById('easterEggModal').style.display = 'none';
-        }, 3000);
+            clicks++;
+            lastClickTime = currentTime;
 
-        // Reset clicks for potential future use
-        clicks = 0;
-    }
-}
+            if (clicks === 5) {
+                // Display the modal
+                document.getElementById('easterEggModal').style.display = 'flex';
 
- // Attach the click event listener to an element of your choice
- document.getElementById('easterEggElement').addEventListener('click', handleEasterEggClick);
- 
+                // Set a timeout to close the modal after a specific duration (e.g., 3 seconds)
+                setTimeout(() => {
+                    document.getElementById('easterEggModal').style.display = 'none';
+                }, 2500);
 
-// Close the modal when clicking outside the content
-document.getElementById('easterEggModal').addEventListener('click', function(event) {
-    if (event.target === this) {
-        this.style.display = 'none';
-    }
-});
-  
+                // Reset clicks for potential future use
+                clicks = 0;
+            }
+        }
+
+        // Attach the click event listener to an element of your choice
+        document.getElementById('easterEggElement').addEventListener('click', handleEasterEggClick);
+
+        // Close the modal when clicking outside the content
+        document.getElementById('easterEggModal').addEventListener('click', function(event) {
+            if (event.target === this) {
+                this.style.display = 'none';
+            }
+        }); 
 </script>
 </body>
 </html>
